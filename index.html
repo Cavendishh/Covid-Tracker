@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Covid19 statistics</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
+  <link rel="stylesheet" href="app.css">
+  <script defer src='app.js'></script>
+  <script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
+</head>
+<body>
+
+  <div class='container'>
+    <h1>Covid19</h1>
+    <div id='worldStatsDiv'>
+      <table id="worldStatsTable">
+        <thead>
+          <tr>
+            <th colspan='3'><h2>Total cases</h2></th>
+          </tr>
+          <tr>
+            <th class='underline'>Confirmed</th>
+            <th class='underline centerline'>Deaths</th>
+            <th class='underline'>Recovered</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class='confirmed'>Total confirmed</td>
+            <td class='deaths centerline'>Total deaths</td>
+            <td class='recovered'>Total recovered</td>
+          </tr>
+          <tr>
+            <td class='confirmed'>New confirmed</td>
+            <td class='deaths centerline'>New deaths</td>
+            <td class='recovered'>New recovered</td>
+          </tr>
+          <tr>
+            <td><img src='img/confirmedIcon.png' alt='confirmed cases icon'></td>
+            <td><img src='img/deathsIcon.png' alt='deaths cases icon'></td>
+            <td><img src='img/recoveredIcon.png' alt='recovered cases icon'></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id='searchBar'>
+      <form id='searchForm' name='searchStatsForm' autocomplete='off'>
+        <img id='searchIcon' src='img/searchIcon.png'>
+        <input type='text' id='searchCountry' name='searchCountry' placeholder='Search for a country'>
+      </form>
+    </div>
+    <div id='searchHistory'></div>
+    <div id='searchResults'>
+      <p>No countries found.</p>
+    </div>
+    <div id='content'>
+      <div id='contentHeader'>
+      <h3 id='countryTitle'>Country title</h3>
+        <table id='countryStatsTable'>
+          <tbody>
+            <tr>
+              <td class='underline rightline'>Capital: </td>
+              <td class='underline'>Name</td>
+            </tr>
+            <tr>
+              <td class='underline rightline'>Languages: </td>
+              <td class='underline'>Listed</td>
+            </tr>
+            <tr>
+              <td class='rightline'>Population: </td>
+              <td>Amount</td>
+            </tr>
+          </tbody>
+        </table>
+        <table id='weatherStatsTable'>
+          <thead>
+            <tr>
+              <th colspan='2' class='underline'><b>Weather in capital</b></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class='underline rightline'>Temperature:</td>
+              <td class='underline'>°C</td>
+            </tr>
+            <tr>
+              <td class='underline rightline'>Humidity:</td>
+              <td class='underline'>%</td>
+            </tr>
+            <tr>
+              <td class='underline rightline'>Wind speed:</td>
+              <td class='underline'>m/s</td>
+            </tr>
+            <tr>
+              <td class='rightline'><img id='weatherIcon' src='' alt='weather icon'></td>
+              <td>Description</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id='covidStats'>
+        <p class='statusTitle'>Confirmed<br><span class='confirmed number'></span></p>
+        <p class='statusTitle'>Deaths<br><span class='deaths number'></span></p>
+        <p class='statusTitle'>Recovered<br><span class='recovered number'></span></p>
+        <p>Updated on: <span id='lastUpdatedSpan'></span></p>
+        <div>
+          <label for='hideConfirmed'>Confirmed</label>
+          <input id='hideConfirmed' name='hideConfirmed' type='checkbox' checked>
+          <label for='hideDeaths'>Deaths</label>
+          <input id='hideDeaths' name='hideDeaths' type='checkbox' checked>
+          <label for='hideRecovered'>Recovered</label>
+          <input id='hideRecovered' name='hideRecovered' type='checkbox' checked>
+        </div>
+        <table id='covidStatsTable'>
+          <tbody>
+            <tr>
+              <th class='underline rightline'>Days ago</th>
+              <th class='underline rightline'>14</th>
+              <th class='underline rightline'>13</th>
+              <th class='underline rightline'>12</th>
+              <th class='underline rightline'>11</th>
+              <th class='underline rightline'>10</th>
+              <th class='underline rightline'>9</th>
+              <th class='underline rightline'>8</th>
+              <th class='underline rightline'>7</th>
+              <th class='underline rightline'>6</th>
+              <th class='underline rightline'>5</th>
+              <th class='underline rightline'>4</th>
+              <th class='underline rightline'>3</th>
+              <th class='underline rightline'>2</th>
+              <th class='underline'>1</th>
+            </tr>
+            </tr>
+            <tr id='confirmedTr'>
+              <th class='underline rightline'>Confirmed</th>
+              <td class='rightline confirmed'></td>
+              <td class='rightline confirmed'></td>
+              <td class='rightline confirmed'></td>
+              <td class='rightline confirmed'></td>
+              <td class='rightline confirmed'></td>
+              <td class='rightline confirmed'></td>
+              <td class='rightline confirmed'></td>
+              <td class='rightline confirmed'></td>
+              <td class='rightline confirmed'></td>
+              <td class='rightline confirmed'></td>
+              <td class='rightline confirmed'></td>
+              <td class='rightline confirmed'></td>
+              <td class='rightline confirmed'></td>
+              <td class='confirmed'></td>
+            </tr>
+            <tr id='deathsTr'>
+              <th class='underline rightline'>Deaths</th>
+              <td class='rightline deaths'></td>
+              <td class='rightline deaths'></td>
+              <td class='rightline deaths'></td>
+              <td class='rightline deaths'></td>
+              <td class='rightline deaths'></td>
+              <td class='rightline deaths'></td>
+              <td class='rightline deaths'></td>
+              <td class='rightline deaths'></td>
+              <td class='rightline deaths'></td>
+              <td class='rightline deaths'></td>
+              <td class='rightline deaths'></td>
+              <td class='rightline deaths'></td>
+              <td class='rightline deaths'></td>
+              <td class='deaths'></td>
+            </tr>
+            <tr id='recoveredTr'>
+              <th class='rightline'>Recovered</th>
+              <td class='rightline recovered'></td>
+              <td class='rightline recovered'></td>
+              <td class='rightline recovered'></td>
+              <td class='rightline recovered'></td>
+              <td class='rightline recovered'></td>
+              <td class='rightline recovered'></td>
+              <td class='rightline recovered'></td>
+              <td class='rightline recovered'></td>
+              <td class='rightline recovered'></td>
+              <td class='rightline recovered'></td>
+              <td class='rightline recovered'></td>
+              <td class='rightline recovered'></td>
+              <td class='rightline recovered'></td>
+              <td class='recovered'></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+</body>
+</html>
