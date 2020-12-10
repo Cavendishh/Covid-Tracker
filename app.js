@@ -198,8 +198,6 @@ $(function(){
       error: error => console.log('Something went wrong in searchCovidStats function: Error: ', error)
     })
   }
-
-  //
   
   //Function to show fetched covid statistics to the user
   const showCovidStats = data => {
@@ -211,48 +209,28 @@ $(function(){
     span[2].innerText = addCommas(data[day].Recovered)
     span[3].innerText = data[day].Date.slice(0, -10)
 
-    //Hide/unhide confirmed cases on click
-    $('#hideConfirmed').click(() => $("#confirmedTr").toggle())
-    //API data only had total amounts of cases - new cases were not specified. This for loop is to calculate new cases per day
-    //'confirmed' cases
-    let currentDay = 0
-    let cellIndex = 13
-    for (let i = data.length - 1; i > (data.length - 15); i--) {
-      currentDay = i
-      lastDay = i - 1
-      const td = $('#confirmedTr td')
-      td[cellIndex].innerText = addCommas(data[currentDay].Confirmed - data[lastDay].Confirmed)
-      cellIndex--
+    //Function to create rows into an table that are filled with covid data based on calculations
+    const createRow = (data, id1, id2) => {
+      //Adds an event handler to checkbuttons that toggles hide/show on confirmed, deaths, and recovered cases
+      $(`#hide${id1}`).click(() => $(`#${id2}Tr`).toggle())
+      //API data only had total amounts of cases - new cases were not specified. This for loop is to calculate new cases per day
+      //currentDay and cellIndex are to help calculations display backwards - so that they are in order
+      currentDay = 0
+      cellIndex = 13
+      for (let i = data.length - 1; i > (data.length - 15); i--) {
+        currentDay = i
+        lastDay = i - 1
+        const td = $(`#${id2}Tr td`)
+        td[cellIndex].innerText = addCommas(data[currentDay][id1] - data[lastDay][id1])
+        cellIndex--
+      }
     }
 
-    //Hide/unhide death cases on click
-    $('#hideDeaths').click(() => $("#deathsTr").toggle())
-    //API data only had total amounts of cases - new cases were not specified. This for loop is to calculate new cases per day
-    //'deaths' cases
-    currentDay = 0
-    cellIndex = 13
-    for (let i = data.length - 1; i > (data.length - 15); i--) {
-      currentDay = i
-      lastDay = i - 1
-      const td = $('#deathsTr td')
-      td[cellIndex].innerText = addCommas(data[currentDay].Deaths - data[lastDay].Deaths)
-      cellIndex--
-    }
-
-    //Hide/unhide recovered cases on click
-    $('#hideRecovered').click(() => $("#recoveredTr").toggle())
-    //API data only had total amounts of cases - new cases were not specified. This for loop is to calculate new cases per day
-    //'recovered cases
-    currentDay = 0
-    cellIndex = 13
-    for (let i = data.length - 1; i > (data.length - 15); i--) {
-      currentDay = i
-      lastDay = i - 1
-      const td = $('#recoveredTr td')
-      td[cellIndex].innerText = addCommas(data[currentDay].Recovered - data[lastDay].Recovered)
-      cellIndex--
-    }
-  }
+    //Creating rows for confirmed, deaths, and recovered cases to display to the user
+    createRow(data, 'Confirmed', 'confirmed')
+    createRow(data, 'Deaths', 'deaths')
+    createRow(data, 'Recovered', 'recovered')
+  }  
 
   //Execute searchCountry function everytime input has been changed
   $('#searchCountry').on('input', () => searchCountry())
