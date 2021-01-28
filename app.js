@@ -63,7 +63,7 @@ $(function(){
       let country = countryList[0]
 
       //If only one country is found with criteria, many elements will be unhidden by slideDown and shown to the user
-      $('#content').slideDown(2000)
+      $('#content').slideDown(500)
     
       //Searching data from APIs and showing it to the user
       updateSearches(country.name)
