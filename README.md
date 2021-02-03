@@ -1,6 +1,6 @@
 <p><strong>Dynamic Web Application with Javascript</strong></p>
-<p><strong>Category: Dynamic JavaScript</strong></p>
-<p><strong>Project date: November 2020</strong></p>
+<p><strong>Category:</strong> Dynamic JavaScript</p>
+<p><strong>Project date:</strong> November 2020</p>
 <p><strong>Project URL:</strong> https://determined-wright-264634.netlify.app</p>
 <strong>Summary: </strong>
   This project was done by myself as a school project to dynamically make a Javascript web application while using good programming practices 
